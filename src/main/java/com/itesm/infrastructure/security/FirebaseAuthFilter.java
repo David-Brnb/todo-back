@@ -1,0 +1,73 @@
+package com.itesm.infrastructure.security;
+
+import io.quarkus.arc.profile.UnlessBuildProfile;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
+import com.itesm.application.security.AuthenticatedUserContext;
+import com.itesm.application.security.CurrentUser;
+import com.itesm.domain.models.User;
+import com.itesm.domain.repository.UserRepository;
+import jakarta.annotation.Priority;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Priorities;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
+
+import java.io.IOException;
+import java.util.Optional;
+
+@Provider
+@Priority(Priorities.AUTHENTICATION)
+@UnlessBuildProfile("test")
+public class FirebaseAuthFilter implements ContainerRequestFilter {
+    @Inject
+    UserRepository userRepository;
+    @Inject
+    AuthenticatedUserContext authenticatedUserContext;
+
+    @Override
+    public void filter(ContainerRequestContext requestContext) throws IOException {
+        String path = requestContext.getUriInfo().getPath();
+        if(path.equals("/user")) {
+            return;
+        }
+
+        System.out.println(
+
+                "hi"
+        );
+
+        String authHeader = requestContext.getHeaders().getFirst("Authorization");
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            requestContext.abortWith(
+                    Response.status(401).build()
+            );
+        }
+
+        try {
+            assert authHeader != null;
+            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(authHeader.replace("Bearer ", ""), true);
+            System.out.println(decodedToken);
+
+            Optional<User> userOptional = userRepository.findByFirebaseUuid(decodedToken.getUid());
+            if(userOptional.isEmpty()){
+                requestContext.abortWith(
+                        Response.status(401).build()
+                );
+            }
+
+            User user = userOptional.get();
+            CurrentUser currentUser = new CurrentUser(user.getFirebaseUuid(), user.getEmail(), user.getRole(), user.getFullName(), user.getId());
+            authenticatedUserContext.setCurrentUser(currentUser);
+
+        } catch (FirebaseAuthException e) {
+            requestContext.abortWith(
+                    Response.status(401).build()
+            );
+            throw new RuntimeException(e);
+        }
+    }
+}
