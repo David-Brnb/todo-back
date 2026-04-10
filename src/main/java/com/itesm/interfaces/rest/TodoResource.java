@@ -34,4 +34,5 @@ public class TodoResource {
         System.out.println(currentUser.getFullName());
         return Response.ok("Reponse").build();
     }
+
 }
