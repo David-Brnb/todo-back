@@ -14,7 +14,7 @@ public class DeleteTodoUseCase {
     public DeleteTodoUseCase(TodoRepository todoRepository) { this.todoRepository = todoRepository; }
 
     public boolean deleteTodo(String id) {
-        UUID uuid = UUID.fromString("1");
+        UUID uuid = UUID.fromString(id);
         return todoRepository.deleteBID(uuid);
     }
 }
