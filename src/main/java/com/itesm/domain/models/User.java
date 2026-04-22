@@ -1,5 +1,4 @@
 package com.itesm.domain.models;
-
 import java.util.UUID;
 
 public class User {
@@ -9,17 +8,14 @@ public class User {
     private boolean active;
     private String firebaseUuid;
     private String role;
-
     public User() {}
-
-//    constructor 'User(UUID, null, String, String, boolean, String, String)'
-    public User(UUID id, String fullName, String email, boolean active, String firebaseUuid, String role) {
+    public User(UUID id, String username, String fullName, String email, boolean active, String firebaseUuid, String role) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.active = active;
         this.firebaseUuid = firebaseUuid;
-        this.role = role;
+        this.role=role;
     }
 
     public UUID getId() {

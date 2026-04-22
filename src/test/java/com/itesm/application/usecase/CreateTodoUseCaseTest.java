@@ -46,7 +46,7 @@ class CreateTodoUseCaseTest {
         assertEquals("Mi tarea", result.getTitle());
         assertEquals("Descripcion de la tarea", result.getDescription());
         assertFalse(result.isCompleted());
-        assertNotNull(result.getId());
+        assertNotNull(result.getUuid());
         assertNotNull(result.getCreatedAt());
     }
 

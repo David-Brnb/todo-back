@@ -1,13 +1,14 @@
 package com.itesm.application.dto;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class RegisterUserDto {
     @NotBlank(message = "El email es obligatorio")
-    @Email(message = "El email deberia tener un formato valido")
+    @Email(message = "El email debe tener un formato valido")
     private String email;
 
-    @NotBlank(message = "La contraseña es obligatoria")
+    @NotBlank(message = "El password es obligatorio")
     private String password;
 
     @NotBlank(message = "El nombre completo es obligatorio")
@@ -35,14 +36,5 @@ public class RegisterUserDto {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    @Override
-    public String toString() {
-        return "RegisterUserDto{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                '}';
     }
 }

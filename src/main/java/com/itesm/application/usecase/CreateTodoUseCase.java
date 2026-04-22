@@ -23,11 +23,12 @@ public class CreateTodoUseCase {
 
     public Todo execute(CreateTodoDTO createTodoDTO) {
         Todo todo = new Todo();
-        todo.setId(UUID.randomUUID());
+        todo.setUuid(UUID.randomUUID());
         todo.setCreatedAt(LocalDateTime.now());
         todo.setTitle(createTodoDTO.getTitle());
         todo.setDescription(createTodoDTO.getDescription());
         todo.setCompleted(false);
+        todo.setOwnerId(authenticatedUserContext.getCurrentUser().getUserId());
         return todoRepository.save(todo);
     }
 }

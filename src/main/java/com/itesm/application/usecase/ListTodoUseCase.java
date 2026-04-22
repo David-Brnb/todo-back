@@ -17,6 +17,6 @@ public class ListTodoUseCase {
     }
 
     public List<Todo> execute() {
-        return todoRepository.findOll();
+        return todoRepository.findAllWithJoinFetch();
     }
 }

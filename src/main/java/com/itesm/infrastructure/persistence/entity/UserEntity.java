@@ -13,25 +13,18 @@ import java.util.UUID;
 public class UserEntity {
     @Id
     private UUID id;
-
     @Column(nullable = false, length = 255, name="full_name")
     private String fullName;
-
     @Column(nullable = false, length = 255, unique = true)
     private String email;
-
     @Column(nullable = false)
     private boolean active;
-
     @Column(name = "firebase_uuid", unique=true, length = 128)
     private String firebaseUuid;
-
     @Column(nullable=false, name="created_at")
     private LocalDateTime createdAt;
-
     @Column(nullable = false, name="updated_at")
     private LocalDateTime updatedAt;
-
     @Column
     private String role;
 

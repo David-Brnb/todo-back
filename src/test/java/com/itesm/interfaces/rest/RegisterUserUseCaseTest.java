@@ -68,7 +68,7 @@ class RegisterUserUseCaseTest {
     @Test
     void register_shouldReturn200WithUser() throws Exception {
         UUID userId = UUID.fromString("11111111-1111-1111-1111-111111111111");
-        User mockUser = new User(userId, "Juan Perez", "juan@test.com", true, "fb-123", "USER");
+        User mockUser = new User(userId, null, "Juan Perez", "juan@test.com", true, "fb-123", "USER");
 
         given()
                 .contentType("application/json")

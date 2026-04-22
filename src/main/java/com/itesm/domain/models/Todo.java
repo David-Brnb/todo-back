@@ -1,34 +1,37 @@
 package com.itesm.domain.models;
 
-
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.*;
 
 public class Todo {
-    private UUID id;
+    private UUID uuid;
     private String title;
     private String description;
     private boolean completed;
     private LocalDateTime createdAt;
+    private UUID ownerId;
+    private List<Comment> comments = new ArrayList<>();
+    private Set<Category> categories = new HashSet<>();
 
     public Todo(){
-
     }
-
-    public Todo(UUID id, String title, String description, boolean completed, LocalDateTime createdAt) {
-        this.id = id;
+    public Todo(UUID uuid, String title, String description, boolean completed, LocalDateTime createdAt) {
+        this.uuid = uuid;
         this.title = title;
         this.description = description;
         this.completed = completed;
         this.createdAt = createdAt;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getOwnerId() { return ownerId; }
+    public void setOwnerId(UUID ownerId) { this.ownerId = ownerId; }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getTitle() {
@@ -63,10 +66,26 @@ public class Todo {
         this.createdAt = createdAt;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments != null ? comments : new ArrayList<>();
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories != null ? categories : new HashSet<>();
+    }
+
     @Override
     public String toString() {
         return "Todo{" +
-                "id=" + id +
+                "uuid=" + uuid +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", completed=" + completed +
