@@ -30,48 +30,48 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-//        String path = requestContext.getUriInfo().getPath();
-//
-//        if(path.equals("/user")) {
-//            return;
-//        }
-//        if(path.startsWith("/todo/demo")){
-//            return;
-//        }
-//
-//        System.out.println(
-//
-//                "hi"
-//        );
-//
-//        String authHeader = requestContext.getHeaders().getFirst("Authorization");
-//        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
-//            requestContext.abortWith(
-//                    Response.status(401).build()
-//            );
-//        }
-//
-//        try {
-//            assert authHeader != null;
-//            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(authHeader.replace("Bearer ", ""), true);
-//            System.out.println(decodedToken);
-//
-//            Optional<User> userOptional = userRepository.findByFirebaseUuid(decodedToken.getUid());
-//            if(userOptional.isEmpty()){
-//                requestContext.abortWith(
-//                        Response.status(401).build()
-//                );
-//            }
-//
-//            User user = userOptional.get();
-//            CurrentUser currentUser = new CurrentUser(user.getFirebaseUuid(), user.getEmail(), user.getRole(), user.getFullName(), user.getId());
-//            authenticatedUserContext.setCurrentUser(currentUser);
-//
-//        } catch (FirebaseAuthException e) {
-//            requestContext.abortWith(
-//                    Response.status(401).build()
-//            );
-//            throw new RuntimeException(e);
-//        }
+        String path = requestContext.getUriInfo().getPath();
+
+        if(path.equals("/user")) {
+            return;
+        }
+        if(path.startsWith("/todo/demo")){
+            return;
+        }
+
+        System.out.println(
+
+                "hi"
+        );
+
+        String authHeader = requestContext.getHeaders().getFirst("Authorization");
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            requestContext.abortWith(
+                    Response.status(401).build()
+            );
+        }
+
+        try {
+            assert authHeader != null;
+            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(authHeader.replace("Bearer ", ""), true);
+            System.out.println(decodedToken);
+
+            Optional<User> userOptional = userRepository.findByFirebaseUuid(decodedToken.getUid());
+            if(userOptional.isEmpty()){
+                requestContext.abortWith(
+                        Response.status(401).build()
+                );
+            }
+
+            User user = userOptional.get();
+            CurrentUser currentUser = new CurrentUser(user.getFirebaseUuid(), user.getEmail(), user.getRole(), user.getFullName(), user.getId());
+            authenticatedUserContext.setCurrentUser(currentUser);
+
+        } catch (FirebaseAuthException e) {
+            requestContext.abortWith(
+                    Response.status(401).build()
+            );
+            throw new RuntimeException(e);
+        }
     }
 }

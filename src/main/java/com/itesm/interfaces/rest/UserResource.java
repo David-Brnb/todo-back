@@ -36,4 +36,7 @@ public class UserResource {
             return Response.serverError().build();
         }
     }
+
+    // implement login
+
 }

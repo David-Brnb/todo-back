@@ -6,7 +6,9 @@ INSERT INTO users (id, full_name, email, active, firebase_uuid, created_at, upda
 (UNHEX(REPLACE('11111111-1111-1111-1111-111111111111','-','')), 'Ana Garcia',   'ana@itesm.mx',   true, 'seed-ana',   NOW(), NOW(), 'USER'),
 (UNHEX(REPLACE('22222222-2222-2222-2222-222222222222','-','')), 'Luis Perez',   'luis@itesm.mx',  true, 'seed-luis',  NOW(), NOW(), 'USER'),
 (UNHEX(REPLACE('33333333-3333-3333-3333-333333333333','-','')), 'Maria Lopez',  'maria@itesm.mx', true, 'seed-maria', NOW(), NOW(), 'USER'),
-(UNHEX(REPLACE('44444444-4444-4444-4444-444444444444','-','')), 'Carlos Ruiz',  'carlos@itesm.mx',true, 'seed-carlos',NOW(), NOW(), 'USER');
+(UNHEX(REPLACE('44444444-4444-4444-4444-444444444444','-','')), 'Carlos Ruiz',  'carlos@itesm.mx',true, 'seed-carlos',NOW(), NOW(), 'USER'),
+(UNHEX(REPLACE('55555555-5555-5555-5555-555555555555','-','')), 'Example',  'example@gmail.com',true, 'IVCimGmgspRBsPAoj8T2glcoiZw2',NOW(), NOW(), 'USER'),
+(UNHEX(REPLACE('66666666-6666-6666-6666-666666666666','-','')), 'Juan',    'juan@htomail.com',  true, 'sr5lTUrhHtUnUuQbhr0846STPZS2', NOW(), NOW(), 'USER');
 
 -- ===== CATEGORIES =====
 INSERT INTO categories (id, name, color) VALUES

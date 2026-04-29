@@ -38,6 +38,10 @@ nb-configuration.xml
 
 # Local environment
 .env
+/resources/
+src/main/resources/application.properties
+src/main/resources/import.sql
+src/main/resources/todo-list-58e01-firebase-adminsdk-fbsvc-*.json
 
 # Plugin directory
 /.quarkus/cli/plugins/
