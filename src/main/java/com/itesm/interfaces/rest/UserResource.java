@@ -2,6 +2,8 @@ package com.itesm.interfaces.rest;
 
 import com.google.firebase.auth.FirebaseAuthException;
 import com.itesm.application.dto.RegisterUserDto;
+import com.itesm.application.security.AuthenticatedUserContext;
+import com.itesm.application.security.CurrentUser;
 import com.itesm.application.usecase.users.FindUserByFirebaseUuidUseCase;
 import com.itesm.application.usecase.users.RegisterUserUseCase;
 import com.itesm.domain.models.User;
@@ -10,7 +12,6 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -25,6 +26,9 @@ public class UserResource {
 
     @Inject
     FindUserByFirebaseUuidUseCase findUserByFirebaseUuidUseCase;
+
+    @Inject
+    AuthenticatedUserContext authenticatedUserContext;
 
     public UserResource(RegisterUserUseCase registerUserUseCase) {
         this.registerUserUseCase = registerUserUseCase;
@@ -44,9 +48,14 @@ public class UserResource {
     }
 
     @GET
-    @Path("/by-firebase/{firebaseUuid}")
-    public Response findByFirebaseUuid(@PathParam("firebaseUuid") String firebaseUuid) {
-        return findUserByFirebaseUuidUseCase.execute(firebaseUuid)
+    @Path("/me")
+    public Response findMyUser() {
+        CurrentUser currentUser = authenticatedUserContext.getCurrentUser();
+        if (currentUser == null) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        return findUserByFirebaseUuidUseCase.execute(currentUser.getFirebaseUuid())
                 .map(user -> Response.ok(user).build())
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
     }
