@@ -1,6 +1,6 @@
 package com.itesm.interfaces.rest;
 
-import com.itesm.application.usecase.RegisterUserUseCase;
+import com.itesm.application.usecase.users.RegisterUserUseCase;
 import com.itesm.domain.models.User;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
@@ -11,7 +11,6 @@ import java.util.UUID;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @QuarkusTest
 class RegisterUserUseCaseTest {

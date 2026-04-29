@@ -1,4 +1,4 @@
-package com.itesm.application.usecase;
+package com.itesm.application.usecase.users;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;

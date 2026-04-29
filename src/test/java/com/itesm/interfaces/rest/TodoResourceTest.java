@@ -1,23 +1,14 @@
 package com.itesm.interfaces.rest;
 
-import com.itesm.application.dto.CreateTodoDTO;
-import com.itesm.application.usecase.CreateTodoUseCase;
-import com.itesm.domain.models.Todo;
+import com.itesm.application.usecase.todos.CreateTodoUseCase;
 import com.itesm.domain.repository.TodoRepository;
-import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @QuarkusTest
 class TodoResourceTest {

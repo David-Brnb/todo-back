@@ -1,6 +1,6 @@
 package com.itesm.interfaces.rest;
 
-import com.itesm.application.usecase.CompletedTodoUseCase;
+import com.itesm.application.usecase.todos.CompletedTodoUseCase;
 import com.itesm.domain.models.Todo;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;

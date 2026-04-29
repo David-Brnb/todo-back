@@ -2,12 +2,15 @@ package com.itesm.interfaces.rest;
 
 import com.google.firebase.auth.FirebaseAuthException;
 import com.itesm.application.dto.RegisterUserDto;
-import com.itesm.application.usecase.RegisterUserUseCase;
+import com.itesm.application.usecase.users.FindUserByFirebaseUuidUseCase;
+import com.itesm.application.usecase.users.RegisterUserUseCase;
 import com.itesm.domain.models.User;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -19,6 +22,9 @@ import jakarta.validation.Valid;
 public class UserResource {
     @Inject
     RegisterUserUseCase registerUserUseCase;
+
+    @Inject
+    FindUserByFirebaseUuidUseCase findUserByFirebaseUuidUseCase;
 
     public UserResource(RegisterUserUseCase registerUserUseCase) {
         this.registerUserUseCase = registerUserUseCase;
@@ -37,6 +43,12 @@ public class UserResource {
         }
     }
 
-    // implement login
+    @GET
+    @Path("/by-firebase/{firebaseUuid}")
+    public Response findByFirebaseUuid(@PathParam("firebaseUuid") String firebaseUuid) {
+        return findUserByFirebaseUuidUseCase.execute(firebaseUuid)
+                .map(user -> Response.ok(user).build())
+                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
+    }
 
 }

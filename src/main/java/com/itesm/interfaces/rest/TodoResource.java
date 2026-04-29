@@ -3,7 +3,7 @@ package com.itesm.interfaces.rest;
 import com.itesm.application.dto.CreateTodoDTO;
 import com.itesm.application.security.AuthenticatedUserContext;
 import com.itesm.application.security.CurrentUser;
-import com.itesm.application.usecase.CreateTodoUseCase;
+import com.itesm.application.usecase.todos.CreateTodoUseCase;
 import com.itesm.domain.models.Todo;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;

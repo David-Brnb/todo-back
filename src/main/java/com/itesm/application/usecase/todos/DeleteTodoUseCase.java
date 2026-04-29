@@ -1,4 +1,4 @@
-package com.itesm.application.usecase;
+package com.itesm.application.usecase.todos;
 
 import com.itesm.domain.repository.TodoRepository;
 import jakarta.enterprise.context.ApplicationScoped;

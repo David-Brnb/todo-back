@@ -35,6 +35,9 @@ public class FirebaseAuthFilter implements ContainerRequestFilter {
         if(path.equals("/user")) {
             return;
         }
+        if(path.startsWith("/user/by-firebase")) {
+            return;
+        }
         if(path.startsWith("/todo/demo")){
             return;
         }

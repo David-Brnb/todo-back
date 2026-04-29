@@ -1,6 +1,6 @@
 package com.itesm.interfaces.rest;
 
-import com.itesm.application.usecase.DeleteTodoUseCase;
+import com.itesm.application.usecase.todos.DeleteTodoUseCase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
